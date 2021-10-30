@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.fetch_rewards_take_home.R
 import com.example.fetch_rewards_take_home.databinding.HomeFragmentBinding
 import com.example.fetch_rewards_take_home.model.User
