@@ -1,5 +1,7 @@
 package com.example.fetch_rewards_take_home.di
 
+import com.example.fetch_rewards_take_home.database.CacheMapper
+import com.example.fetch_rewards_take_home.database.UserDao
 import com.example.fetch_rewards_take_home.network.UserApi
 import com.example.fetch_rewards_take_home.network.UserMapper
 import com.example.fetch_rewards_take_home.repository.UserRepository
@@ -15,11 +17,18 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideMainRepository(
+    fun provideUserRepository(
+        userDao: UserDao,
         userApi: UserApi,
-        userMapper: UserMapper
+        userMapper: UserMapper,
+        cacheMapper: CacheMapper
     ): UserRepository {
-        return UserRepository(userApi, userMapper)
+        return UserRepository(
+            userDao,
+            userApi,
+            userMapper,
+            cacheMapper
+        )
     }
 
 }

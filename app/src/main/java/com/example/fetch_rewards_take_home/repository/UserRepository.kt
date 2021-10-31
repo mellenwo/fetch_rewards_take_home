@@ -1,5 +1,7 @@
 package com.example.fetch_rewards_take_home.repository
 
+import com.example.fetch_rewards_take_home.database.CacheMapper
+import com.example.fetch_rewards_take_home.database.UserDao
 import com.example.fetch_rewards_take_home.model.User
 import com.example.fetch_rewards_take_home.network.UserApi
 import com.example.fetch_rewards_take_home.network.UserMapper
@@ -10,8 +12,10 @@ import kotlinx.coroutines.flow.flow
 import java.lang.Exception
 
 class UserRepository(
+    private val userDao: UserDao,
     private val api: UserApi,
-    private val userMapper: UserMapper
+    private val userMapper: UserMapper,
+    private val cacheMapper: CacheMapper,
 ) {
 
     suspend fun getUsers(): Flow<DataState<List<User>>> = flow {
@@ -20,7 +24,11 @@ class UserRepository(
         try {
             val networkUsers = api.getData()
             val users = userMapper.mapFromEntityList(networkUsers)
-            emit(DataState.Success(users))
+            for (user in users) {
+                userDao.insert(cacheMapper.mapToEntity(user))
+            }
+            val cachedUsers = userDao.get()
+            emit(DataState.Success(cacheMapper.mapFromEntityList(cachedUsers)))
         } catch (e: Exception) {
             emit(DataState.Error(e))
         }

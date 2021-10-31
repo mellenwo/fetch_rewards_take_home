@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fetch_rewards_take_home.R
@@ -23,7 +24,7 @@ class HomeFragment : Fragment() {
         fun newInstance() = HomeFragment()
     }
 
-    private val viewModel: MainViewModel by activityViewModels()
+    private val viewModel: HomeViewModel by activityViewModels()
     private lateinit var adapter: UserAdapter
     private lateinit var binding: HomeFragmentBinding
 
@@ -50,6 +51,9 @@ class HomeFragment : Fragment() {
         adapter = UserAdapter()
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = adapter
+        binding.recyclerView.addItemDecoration(
+            DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
+        )
     }
 
     private fun subscribeObservers() {
