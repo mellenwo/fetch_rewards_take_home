@@ -1,4 +1,4 @@
-package com.example.fetch_rewards_take_home.ui.main
+package com.example.fetch_rewards_take_home.ui.home
 
 import android.view.LayoutInflater
 import android.view.View

@@ -2,7 +2,7 @@ package com.example.fetch_rewards_take_home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.fetch_rewards_take_home.ui.main.HomeFragment
+import com.example.fetch_rewards_take_home.ui.home.HomeFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

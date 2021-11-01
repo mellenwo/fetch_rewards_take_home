@@ -1,4 +1,4 @@
-package com.example.fetch_rewards_take_home.ui.main
+package com.example.fetch_rewards_take_home.ui.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,8 +10,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.fetch_rewards_take_home.R
 import com.example.fetch_rewards_take_home.databinding.HomeFragmentBinding
 import com.example.fetch_rewards_take_home.model.User
 import com.example.fetch_rewards_take_home.util.DataState

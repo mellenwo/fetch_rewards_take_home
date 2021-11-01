@@ -1,10 +1,9 @@
-package com.example.fetch_rewards_take_home.ui.main
+package com.example.fetch_rewards_take_home.ui.home
 
 import androidx.lifecycle.*
 import com.example.fetch_rewards_take_home.model.User
 import com.example.fetch_rewards_take_home.repository.UserRepository
 import com.example.fetch_rewards_take_home.util.DataState
-import dagger.assisted.Assisted
 import javax.inject.Inject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
