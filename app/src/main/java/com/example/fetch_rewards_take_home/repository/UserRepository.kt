@@ -2,10 +2,12 @@ package com.example.fetch_rewards_take_home.repository
 
 import com.example.fetch_rewards_take_home.database.CacheMapper
 import com.example.fetch_rewards_take_home.database.UserDao
+import com.example.fetch_rewards_take_home.di.IoDispatcher
 import com.example.fetch_rewards_take_home.model.User
 import com.example.fetch_rewards_take_home.network.UserApi
 import com.example.fetch_rewards_take_home.network.UserMapper
 import com.example.fetch_rewards_take_home.util.DataState
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -19,6 +21,7 @@ class UserRepository(
     private val api: UserApi,
     private val userMapper: UserMapper,
     private val cacheMapper: CacheMapper,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) {
 
     suspend fun getUsers(): Flow<DataState<List<User>>> = flow {
@@ -33,6 +36,6 @@ class UserRepository(
         } catch (e: Exception) {
             emit(DataState.Error(e))
         }
-    }
+    }.flowOn(ioDispatcher)
 
 }

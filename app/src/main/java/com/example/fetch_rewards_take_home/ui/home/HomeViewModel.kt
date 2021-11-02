@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.onEach
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val repository: UserRepository,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ): ViewModel() {
 
     private val _dataState: MutableLiveData<DataState<List<User>>> = MutableLiveData()
@@ -28,7 +27,6 @@ class HomeViewModel @Inject constructor(
             when (stateEvent) {
                 is HomeStateEvent.GetUserEvents -> {
                     repository.getUsers()
-                        .flowOn(ioDispatcher)
                         .onEach { dataState ->
                             _dataState.value = dataState
                         }
