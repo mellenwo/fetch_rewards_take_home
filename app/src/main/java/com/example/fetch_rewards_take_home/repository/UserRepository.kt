@@ -25,11 +25,9 @@ class UserRepository(
         emit(DataState.Loading)
         delay(1000)
         try {
-            val networkUsers = api.getData()
-            val users = userMapper.mapFromEntityList(networkUsers)
-            for (user in users) {
-                userDao.insert(cacheMapper.mapToEntity(user))
-            }
+            api.getData()
+                .map { networkUsers -> userMapper.mapFromEntity(networkUsers) }
+                .onEach { user -> userDao.insert(cacheMapper.mapToEntity(user)) }
             val cachedUsers = userDao.get()
             emit(DataState.Success(cacheMapper.mapFromEntityList(cachedUsers)))
         } catch (e: Exception) {
