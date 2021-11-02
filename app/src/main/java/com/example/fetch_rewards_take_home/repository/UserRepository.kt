@@ -6,10 +6,13 @@ import com.example.fetch_rewards_take_home.model.User
 import com.example.fetch_rewards_take_home.network.UserApi
 import com.example.fetch_rewards_take_home.network.UserMapper
 import com.example.fetch_rewards_take_home.util.DataState
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import java.lang.Exception
+import kotlin.coroutines.CoroutineContext
 
 class UserRepository(
     private val userDao: UserDao,
